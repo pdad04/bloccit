@@ -4,11 +4,21 @@
     <title>Bloccit</title>
     <%= csrf_meta_tags %>
 
+    <meta name="viewport" content="width=deivce-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li>
+          <%= link_to "Home", welcome_index_path %>
+          <%= link_to "About", welcome_about_path %>
+        </li>
+      </ul>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
