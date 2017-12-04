@@ -8,6 +8,10 @@ require 'random_data'
   )
 end
 
+puts "#{Post.count}"
+Post.find_or_create_by!(title: "Unique Title", body: "This is the body for the unique post")
+puts "#{Post.count}"
+
 posts = Post.all
 
 100.times do
@@ -16,6 +20,10 @@ posts = Post.all
     body: RandomData.random_paragraph
   )
 end
+
+puts "#{Comment.count}"
+Comment.create_with(body: 'A unique comment').find_or_create_by(post: posts.find(51))
+puts "#{Comment.count}"
 
 puts "Seed finished"
 puts "#{Post.count} posts created"
