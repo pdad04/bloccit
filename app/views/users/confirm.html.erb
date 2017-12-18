@@ -1,0 +1,18 @@
+<h1>Sign Up Confirmation<br /><br /></h1>
+
+<h3>Are you sure these values are correct?<br /><br /></h3>
+
+<ul class="list-unstyled">
+  <li class="media">
+    <div class="media-body">
+      <h4>Email: <%= @user.email%></h4>
+    </div>
+  </li>
+  <li class="media">
+    <div class="media-body">
+      <h4>Name: <%= @user.name%></h4>
+    </div>
+  </li>
+</ul>
+<%= button_to "Yes", {controller: "users", action: "create", params: params}, class: 'btn btn-success' %>
+<%= link_to "No",new_user_path, class: 'btn btn-danger' %>
