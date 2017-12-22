@@ -39,8 +39,15 @@ end
 admin = User.create!(
   name:     'Admin User',
   email:    'admin@example.com',
-  password: 'hellowworld',
+  password: 'helloworld',
   role:     'admin'
+)
+
+moderator = User.create!(
+  name:     'Moderator User',
+  email:    'moderator@example.com',
+  password: 'helloworld',
+  role:     'moderator'
 )
 
 member = User.create!(
