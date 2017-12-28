@@ -66,14 +66,14 @@ RSpec.describe Post, type: :model do
     end
 
     it "updates the rank when an up vote is created" do
-      post.rank = (post.points + (post.created_at - Time.new(1970,1,1)) / 1.day.seconds)
+      post.update_rank
       old_rank = post.rank
       post.votes.create!(value: 1, user: user)
       expect(post.rank).to eq(old_rank + 1)
     end
 
     it "updates the rank when a down votes is created" do
-      post.rank = (post.points + (post.created_at - Time.new(1970,1,1)) / 1.day.seconds)
+      post.update_rank
       old_rank = post.rank
       post.votes.create!(value: -1, user: user)
       expect(post.rank).to eq(old_rank - 1)
