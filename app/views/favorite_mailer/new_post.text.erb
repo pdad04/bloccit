@@ -1,0 +1,8 @@
+New Post Favorited "<%= @post.title %>"
+<%= "=" * (@post.title.length + 12) %>
+
+By: <%=@post.user.name %>
+
+You will receive email notifications when a comment is made on this post.
+
+Visit online at: <%= topic_post_url(@post.topic, @post) %>
