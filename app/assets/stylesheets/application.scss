@@ -16,3 +16,8 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+ .user-info li{
+   clear: right !important;
+   margin-left: 5px;
+ }

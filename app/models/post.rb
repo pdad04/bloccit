@@ -4,8 +4,10 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  
+
   default_scope { order('rank DESC') }
+
+  scope :visible_to, -> (user) {user ? all : joins(:topic).where('topics.public' => true) }
 
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
