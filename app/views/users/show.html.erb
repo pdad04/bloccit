@@ -19,8 +19,34 @@
   </div>
 </div>
 
-<h2>Posts</h2>
-<%= render @user.posts %>
+<div class="row">
+  <div class="col-md-8">
+    <div class="media">
+      <h1>User Created Posts/Comments</h1>
+      <% if has_posts?(current_user) %>
+        <h2>Posts</h2>
+        <%= render @user.posts %>
+      <% else %>
+        <h3><%= @user.name %> has not created any posts</h3>
+      <% end %>
 
-<h2>Comments</h2>
-<%= render @user.comments %>
+      <% if has_commented?(current_user) %>
+        <h2>Comments</h2>
+        <%= render @user.comments %>
+      <% else %>
+        <h3><%= @user.name %> has not commented on any posts</h3>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="media">
+      <h1>Favorited Posts</h1>
+      <% @user.favorites.each do |favorite| %>
+      <%= render partial: 'posts/favpost', locals: { post: favorite.post } %>
+        <!-- <p>
+          <%= link_to favorite.post.title, topic_post_path(@posts, favorite.post_id)%>
+        </p> -->
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="media">
+  <% avatar_url = post.user.avatar_url(64) %>
+  <% if avatar_url %>
+    <div class="media-left">
+      <%= image_tag avatar_url, class: 'media-object' %>
+    </div>
+  <% end %>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <%= link_to post.title, topic_post_path(post.topic, post) %>
+    </h4>
+    <small>
+      submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
+      <%= pluralize(post.comments.count, 'Comment') %> | <%= pluralize(post.votes.count,'Vote') %>
+    </small>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 require 'rails_helper'
+include SessionsHelper
 
 RSpec.describe UsersController, type: :controller do
   let(:new_user_attributes) do
@@ -8,6 +9,30 @@ RSpec.describe UsersController, type: :controller do
       password: "blochead",
       password_confirmation: "blochead"
     }
+  end
+
+  let(:my_user) {create(:user)}
+  let(:my_topic) {create(:topic)}
+  let(:my_post) {create(:post)}
+
+  describe "GET show" do
+    before do
+      create_session(my_user)
+    end
+
+    it "renders the show view" do
+      get :show, params: {id: my_user.id}
+      expect(response).to have_http_status(:success)
+    end
+
+    # it "displays user created posts" do
+    #   get :show, params: { topic_id: my_topic.id, id: my_post.id }
+    #   expect(assigns(:post)).to eq(my_post)
+    # end
+
+    # it "assigns user to @user" do
+    #   expect(assigns(:user)).to eq(my_user)
+    # end
   end
 
   describe "GET new" do
