@@ -19,8 +19,72 @@
   </div>
 </div>
 
-<h2>Posts</h2>
-<%= render @user.posts %>
+<div class="row">
+  <div class="col-md-8">
+    <div class="media">
+      <h2>Posts</h2>
+      <%= render @user.posts %>
 
-<h2>Comments</h2>
-<%= render @user.comments %>
+      <h2>Comments</h2>
+      <%= render @user.comments %>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-12">
+    <h2 class="media-heading">Users</h2>
+    <table class="table table-striped">
+      <tr>
+        <th></th>
+        <th scope="col"> Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr>
+          <td scope="row"><%=check_box user.id, :id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.role.capitalize %></td>
+        </tr>
+      <%end%>
+    </table>
+    <%= submit_tag "Update Role", class: 'btn btn-success' %>
+  </div>
+</div> -->
+
+<% if current_user.admin? %>
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="media-heading">Users</h2>
+      <%= form_tag user_path(current_user), method: :put do %>
+      <table class="table table-striped">
+        <tr>
+          <th></th>
+          <th scope="col"> Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Role</th>
+        </tr>
+        <% @users.each do |user| %>
+          <tr>
+            <% if current_user.id == user.id %>
+              <td></td>
+            <%else%>
+              <td scope="row"><%=check_box_tag 'update[]', user.id %></td>
+            <%end%>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <% if user.admin? %>
+              <td><strong><%= user.role.capitalize %></strong></td>
+            <%else%>
+              <td><%= user.role.capitalize %></td>
+            <%end%>
+          </tr>
+        <%end%>
+      </table>
+      <%= submit_tag "Update Role", class: 'btn btn-success' %>
+      <%end%>
+    </div>
+  </div>
+<%end%>

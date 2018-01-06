@@ -30,7 +30,7 @@ class TopicsController < ApplicationController
 
   def update
     @topic = Topic.find(params[:id])
-
+    p @topic
     @topic.assign_attributes(topic_params)
 
     if @topic.save
