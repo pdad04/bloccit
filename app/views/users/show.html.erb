@@ -69,7 +69,7 @@
         <% @users.each do |user| %>
           <tr>
             <% if current_user.id == user.id %>
-              <td></td>
+              <td scope="row"><%=check_box_tag 'update[]', user.id, false, disabled: true%></td>
             <%else%>
               <td scope="row"><%=check_box_tag 'update[]', user.id %></td>
             <%end%>
