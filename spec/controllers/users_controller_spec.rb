@@ -14,6 +14,7 @@ RSpec.describe UsersController, type: :controller do
   let(:my_user) {create(:user)}
   let(:my_topic) {create(:topic)}
   let(:my_post) {create(:post)}
+  let(:other_post) {create(:post)}
 
   describe "GET show" do
     before do
@@ -25,14 +26,18 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    # it "displays user created posts" do
-    #   get :show, params: { topic_id: my_topic.id, id: my_post.id }
-    #   expect(assigns(:post)).to eq(my_post)
-    # end
+    it "displays favorited posts" do
+      my_favorite = Favorite.create(user: my_user, post: other_post)
+      expect(my_user.favorites.count).to eq(1)
+    end
 
-    # it "assigns user to @user" do
-    #   expect(assigns(:user)).to eq(my_user)
-    # end
+    it "displays the number of comments for the favorited post" do
+      expect(other_post.comments.count).to eq(0)
+    end
+
+    it "displays the number of votes for the favorited post" do
+      expect(other_post.votes.count). to eq(0)
+    end
   end
 
   describe "GET new" do
